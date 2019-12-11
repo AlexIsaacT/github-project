@@ -1,0 +1,44 @@
+#include<stdio.h>
+#define MAX 100
+int escape(char s[], char t[]);
+int main()
+{
+  int c, i;
+  char t[MAX], s[MAX];
+  for (i = 0; i <= MAX; i++)
+  t[i] = 0;
+  for (i = 0; (c = getchar()) != EOF; i++)
+  t[i] = c;
+  escape(s, t);
+  printf ("%s\n", s);
+  return 0;
+}
+int escape(char s[], char t[])
+{
+  int i, j;
+  for (i = 0; i <= MAX; i++)
+  s[i] = 0;
+  for (i = 0, j = 0; t[i] != '\0'; i++,j++)
+  {
+    switch(t[i])
+    {
+     case '\\' :
+      if (t[i+1] == 'n')
+      {
+      s[j] = '\n';
+      i++;
+    }
+      else if(t[i+1] == 't')
+      {
+      s[j] = '\t';
+      i++;
+    }
+      else
+      s[j] = t[i];
+      break;
+     default :
+      s[j] = t[i];
+      break;
+    }
+  }
+}
